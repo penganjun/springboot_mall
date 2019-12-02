@@ -1,0 +1,5 @@
+centos
+    root root
+    ajpeng 123456
+jenkins
+    jenkins

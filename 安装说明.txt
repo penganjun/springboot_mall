@@ -11,6 +11,39 @@ firewall-cmd --zone=public --add-port=8080/tcp --permanent
 --permanent：永久生效，如果没有此参数，则只能维持当前服务生命周期内，重新启动后失效；
 
 
+1、开放端口
+
+firewall-cmd --zone=public --add-port=5672/tcp --permanent   # 开放5672端口
+
+firewall-cmd --zone=public --remove-port=5672/tcp --permanent  #关闭5672端口
+
+firewall-cmd --reload   # 配置立即生效
+
+2、查看防火墙所有开放的端口
+
+firewall-cmd --zone=public --list-ports
+
+3.、关闭防火墙
+
+如果要开放的端口太多，嫌麻烦，可以关闭防火墙，安全性自行评估
+
+systemctl stop firewalld.service
+
+5、查看监听的端口
+
+netstat -lnpt
+
+6、检查端口被哪个进程占用
+
+netstat -lnpt |grep 5672
+
+7、查看进程的详细信息
+
+ps 6832
+
+
+
+
 
 
 
