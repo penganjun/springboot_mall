@@ -2,4 +2,5 @@ centos
     root root
     ajpeng 123456
 jenkins
-    jenkins
+    /var/lib/jenkins/secrets/initialAdminPassword
+    d235eed6cc4641829bc7fec57a23c4e2

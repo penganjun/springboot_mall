@@ -41,6 +41,27 @@ netstat -lnpt |grep 5672
 
 ps 6832
 
+#jenkins
+systemctl start jenkins.service 启动jenkins
+systemctl enable jenkins.service 设置jenkins开机启动
+systemctl stop jenkins.service 关闭jenkins
+systemctl status jenkins.service 查看jenkins的状态
+
+彻底卸载jenkins
+
+service jenkins stop
+yum clean all
+yum -y remove jenkins
+rm -rf /var/cache/jenkins
+rm -rf /var/lib/jenkins/
+
+
+centos7删除自带openjdk
+   https://www.cnblogs.com/ystq/p/5972608.html
+
+
+
+
 
 
 
