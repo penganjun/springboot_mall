@@ -1,6 +1,18 @@
 centos
     root root
     ajpeng 123456
+
 jenkins
     /var/lib/jenkins/secrets/initialAdminPassword
     d235eed6cc4641829bc7fec57a23c4e2
+    jenkins的默认JENKINS_PORT是8080,修改为8088
+    jenkins jenkins
+
+jenkins plugins list
+    Publish over SSH
+    Git
+    Maven plugin
+
+jdk install directory
+    /usr/local/java/jdk1.8.0_11
+

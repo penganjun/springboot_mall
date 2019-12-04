@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloWorldController {
     @RequestMapping("/hello")
     public String say(){
-        return "Spring Boot 你大爷！";
+        return "Spring Boot！";
     }
 }
