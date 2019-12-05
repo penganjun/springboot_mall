@@ -16,3 +16,6 @@ jenkins plugins list
 jdk install directory
     /usr/local/java/jdk1.8.0_11
 
+mysql
+    root   Paj@123456
+
