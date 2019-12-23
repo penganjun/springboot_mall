@@ -61,6 +61,72 @@ centos7删除自带openjdk
    https://www.cnblogs.com/ystq/p/5972608.html
 
 
+#配置zk开机自启
+ cd /etc/init.d
+ touch zookeeper
+ chmod +x zookeeper
+ vim zookeeper
+
+#!/bin/bash
+# chkconfig:35 81 82
+# description:zookeeper server script
+export JAVA_HOME=/usr/local/java/jdk1.8.0_11
+export PATH=$JAVA_HOME/bin:$PATH
+case $1 in
+        start) su root /home/zk/zookeeper-3.4.11/bin/zkServer.sh start;;
+        stop)  su root /home/zk/zookeeper-3.4.11/bin/zkServer.sh stop;;
+        status) su root /home/zk/zookeeper-3.4.11/bin/zkServer.sh status;;
+        restart) su root /home/zk/zookeeper-3.4.11/bin/zkServer.sh restart;;
+        *) echo "require start|stop|status|restart";;
+esac
+
+
+chkconfig --add zookeeper
+chkconfig zookeeper on
+#配置zk开机自启
+
+
+
+#配置dubboAdmin开机自启
+cd /usr/lib/systemd/system/
+touch dubboAdmin.service
+vim dubboAdmin.service
+
+vim start.sh
+
+#!/bin/sh
+export PATH=$JAVA_HOME/bin:$PATH
+nohup java -jar /home/dubbo/dubbo-admin-server-0.1.jar >/dev/null  &
+echo $! > /var/run/dubbo-amdin.pid
+
+vim stop.sh
+
+#!/bin/sh
+PID=$(cat /var/run/dubbo-amdin.pid)
+kill -9 $PID
+
+chmod +x start.sh stop.sh
+
+#!/bin/sh
+[Unit]
+Description=dubboAdmin-service
+After=syslog.target network.target remote-fs.target nss-lookup.target
+[Service]
+Type=forking
+ExecStart=/root/app/reboot_shell/duboo_amdin/start.sh
+ExecStop=/root/app/reboot_shell/duboo_amdin/stop.sh
+PrivateTmp=true
+[Install]
+WantedBy=multi-user.target
+
+systemctl enable dubboAdmin.service
+
+#配置dubboAdmin开机自启
+
+systemctl enable xxx.service 设置某个服务开机启动
+systemctl disable xxx.service 设置取消某个服务开机启动
+systemctl stop xxx.service 关闭某个服务
+systemctl status xxx.service 查看某个服务状态
 
 
 
