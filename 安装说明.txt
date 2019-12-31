@@ -129,6 +129,10 @@ systemctl stop xxx.service 关闭某个服务
 systemctl status xxx.service 查看某个服务状态
 
 
+clean -Dmaven.test.skip=true install -P local_prod -f pom.xml
+
+-Djetty.port=8083  -DproxyType=4 -DproxyHost=172.16.1.245 -DproxyPort=8080 -DproxySet=true
+
 
 
 
