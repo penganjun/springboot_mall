@@ -5,7 +5,7 @@
     <title>图书管理页面</title>
 </head>
 <body>
-<a href="/book/bookAdd.html">添加图书</a>
+<a href="/mmall/book/bookAdd.html">添加图书</a>
 <table>
     <tr>
         <th>编号</th>
