@@ -135,7 +135,7 @@ clean -Dmaven.test.skip=true install -P local_prod -f pom.xml
 
 
 
-
+mvn install:install-file -Dfile=E:\lllllllllllllllllll\magpie\magpie\1.1.13.Final\magpie-1.1.13.Final.jar -DgroupId=com.unionpay.magpie -DartifactId=magpie -Dversion=1.1.13.Final -Dpackaging=jar
 
 
 
