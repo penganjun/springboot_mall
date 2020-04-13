@@ -134,7 +134,6 @@ clean -Dmaven.test.skip=true install -P local_prod -f pom.xml
 -Djetty.port=8083  -DproxyType=4 -DproxyHost=172.16.1.245 -DproxyPort=8080 -DproxySet=true
 
 
-
 mvn install:install-file -Dfile=E:\lllllllllllllllllll\magpie\magpie\1.1.13.Final\magpie-1.1.13.Final.jar -DgroupId=com.unionpay.magpie -DartifactId=magpie -Dversion=1.1.13.Final -Dpackaging=jar
 
 
