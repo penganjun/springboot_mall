@@ -5,6 +5,7 @@
     <title>图书管理页面</title>
 </head>
 <body>
+<h1>port:${port}</h1>
 <a href="/mmall/book/bookAdd.html">添加图书</a>
 <table>
     <tr>

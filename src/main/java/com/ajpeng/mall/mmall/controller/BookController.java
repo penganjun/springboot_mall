@@ -3,6 +3,7 @@ package com.ajpeng.mall.mmall.controller;
 import com.ajpeng.mall.mmall.dao.BookDao;
 import com.ajpeng.mall.mmall.entity.Book;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,10 +18,14 @@ public class BookController {
     @Resource
     private BookDao bookDao;
 
+    @Value("server.port")
+    private String port;
+
     @RequestMapping(value = "/list")
     public ModelAndView list() {
         ModelAndView mav = new ModelAndView();
         mav.addObject("bookList", bookDao.findAll());
+        mav.addObject("port", port);
         mav.setViewName("book/bookList");
         log.info("查询成功");
         return mav;
