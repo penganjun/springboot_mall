@@ -26,7 +26,7 @@ import java.util.Map;
  */
 public class ESTest {
 
-    private static String host = "192.168.5.101"; // 服务器地址
+    private static String host = "127.0.0.1"; // 服务器地址
     private static int port = 9300; // 端口
     private TransportClient client = null;
 
