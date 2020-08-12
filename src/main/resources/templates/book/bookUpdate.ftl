@@ -8,6 +8,7 @@
 <form action="/mmall/book/update" method="post">
     <input type="hidden" name="id" th:value="*{book.id}"/>
     图书名称：<input type="text" name="bookName" th:value="*{book.bookName}"/><br/>
+    <input type="hidden" name="version" th:value="*{book.version}"/>
     <input type="submit" value="提交"/>
 </form>
 </body>

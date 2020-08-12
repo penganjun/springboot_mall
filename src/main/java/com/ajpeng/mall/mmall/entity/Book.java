@@ -1,36 +1,34 @@
 package com.ajpeng.mall.mmall.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lombok.Data;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "t_book")
+@Data
 public class Book {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "int COMMENT '主键ID'")
     private Integer id;
 
-    @Column(length = 100)
+    @Column(name = "book_name", length = 100, columnDefinition = "varchar(100) COMMENT '书籍名称'")
     private String bookName;
 
-    public Integer getId() {
-        return id;
-    }
+    @Version
+    @Column(columnDefinition = "int default 0 COMMENT '版本'")
+    private Integer version;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    @LastModifiedDate
+    @Column(name = "update_time", insertable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间'")
+    private Date updateTime;
 
-    public String getBookName() {
-        return bookName;
-    }
-
-    public void setBookName(String bookName) {
-        this.bookName = bookName;
-    }
-
+    @CreatedDate
+    @Column(name = "create_time", insertable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间'")
+    private Date createTime;
 }

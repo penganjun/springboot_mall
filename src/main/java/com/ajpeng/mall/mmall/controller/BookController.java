@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @Slf4j
@@ -18,14 +19,15 @@ public class BookController {
     @Resource
     private BookDao bookDao;
 
-    @Value("server.port")
+    @Value("${server.port}")
     private String port;
 
     @RequestMapping(value = "/list")
-    public ModelAndView list() {
+    public ModelAndView list(HttpSession session) {
         ModelAndView mav = new ModelAndView();
         mav.addObject("bookList", bookDao.findAll());
         mav.addObject("port", port);
+        mav.addObject("name", session.getAttribute("name"));
         mav.setViewName("book/bookList");
         log.info("查询成功");
         return mav;
@@ -38,10 +40,11 @@ public class BookController {
      * @return
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String add(Book book) {
+    public String add(HttpSession session, Book book) {
+        session.setAttribute("name", book.getBookName());
         bookDao.save(book);
         log.info("新增成功");
-        return "forward:/book/list";
+        return "redirect:/book/list";
     }
 
     @GetMapping(value = "/preUpdate/{id}")
@@ -61,9 +64,10 @@ public class BookController {
      */
     @PostMapping(value = "/update")
     public String update(Book book) {
+        log.info("修改,参数:" + book.toString());
         bookDao.save(book);
         log.info("修改成功,参数:" + book.toString());
-        return "forward:/book/list";
+        return "redirect:/book/list";
     }
 
     /**
@@ -76,7 +80,7 @@ public class BookController {
     public String delete(Integer id) {
         bookDao.deleteById(id);
         log.info("删除成功,参数:" + id);
-        return "forward:/book/list";
+        return "redirect:/book/list";
     }
 
 }
