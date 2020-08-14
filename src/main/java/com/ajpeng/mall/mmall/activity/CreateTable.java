@@ -1,6 +1,5 @@
 package com.ajpeng.mall.mmall.activity;
 
-import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.ProcessEngineConfiguration;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -36,9 +35,9 @@ public class CreateTable {
          * create-drop 先删除表再创建表
          * true 自动创建和更新表
          */
-        pec.setDatabaseSchemaUpdate(ProcessEngineConfiguration.DB_SCHEMA_UPDATE_TRUE);
+        pec.setDatabaseSchemaUpdate(ProcessEngineConfiguration.DB_SCHEMA_UPDATE_FALSE);
 
         // 获取流程引擎对象
-        ProcessEngine processEngine = pec.buildProcessEngine();
+//        ProcessEngine processEngine = pec.buildProcessEngine();
     }
 }

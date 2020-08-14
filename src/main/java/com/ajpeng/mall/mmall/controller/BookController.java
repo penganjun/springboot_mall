@@ -4,6 +4,10 @@ import com.ajpeng.mall.mmall.dao.BookDao;
 import com.ajpeng.mall.mmall.entity.Book;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,11 +27,20 @@ public class BookController {
     private String port;
 
     @RequestMapping(value = "/list")
-    public ModelAndView list(HttpSession session) {
+    public ModelAndView list(HttpSession session,
+                             @RequestParam(value = "start", defaultValue = "0") Integer start,
+                             @RequestParam(value = "limit", defaultValue = "10") Integer limit) {
         ModelAndView mav = new ModelAndView();
-        mav.addObject("bookList", bookDao.findAll());
+        start = start < 0 ? 0 : start;
+        Sort sort = Sort.by("createTime");
+        Pageable pageable = PageRequest.of(start, limit, sort);  //分页信息
+        Page<Book> all = bookDao.findAll(pageable);
+        mav.addObject("bookList", all);
         mav.addObject("port", port);
         mav.addObject("name", session.getAttribute("name"));
+        mav.addObject("start", start);
+        mav.addObject("limit", limit);
+        mav.addObject("totalPages", all.getTotalPages());
         mav.setViewName("book/bookList");
         log.info("查询成功");
         return mav;
