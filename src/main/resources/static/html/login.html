@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="UTF-8">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>登录</title>
+    <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+</head>
+<script type="text/javascript">
+</script>
+<body>
+<h2>登录</h2>
+<form action="/mmall/book/list" method="post">
+    <table>
+        <tr>
+            <td>用户名：</td>
+            <td><input type="text" name="username" id="username"></td>
+        </tr>
+        <tr>
+            <td>密码：</td>
+            <td><input type="password" name="password" id="password"></td>
+        </tr>
+        <tr>
+            <td>验证码：</td>
+            <td>
+                <input type="text" name="validateCode" id="validateCode">
+                <img src="/mmall/code/image" width="100px" height="28px"></span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="登录"/>
+            </td>
+        </tr>
+    </table>
+</form>
+<!-- 以下为显示认证失败等提示信息（th:if=""一定要写 ） -->
+<div th:if="${param.error}" th:text="${session?.SPRING_SECURITY_LAST_EXCEPTION?.message}"></div>
+</body>
+</html>
