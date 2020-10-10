@@ -147,7 +147,3 @@ nginx整合fastdfs
 --add-module=/usr/local/fastdfs-nginx-module/src
 
 
-国庆赠书故活动《Java游戏服务器架构实践》抽奖链接：https://mp.weixin.qq.com/s/eveida-b52vSeJc1djdvig
-建议收藏和用电脑阅读：https://github.com/balloonwj/CppGuide
-https://gitee.com/balloonwj/CppGuide
-github打开的话就用github，打不开就用码云吧
