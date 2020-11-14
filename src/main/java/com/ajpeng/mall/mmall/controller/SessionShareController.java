@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/session")
 public class SessionShareController {
 
     @RequestMapping(value = "/getSession")

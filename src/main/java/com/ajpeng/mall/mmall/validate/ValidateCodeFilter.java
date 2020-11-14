@@ -2,6 +2,7 @@ package com.ajpeng.mall.mmall.validate;
 
 import com.ajpeng.mall.mmall.common.Constant;
 import com.ajpeng.mall.mmall.exception.ValidateCodeException;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Component("validateCodeFilter")
+@Slf4j
 public class ValidateCodeFilter extends OncePerRequestFilter implements InitializingBean {
     /**
      * 操作session的工具类
@@ -34,18 +36,10 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        System.out.println(request.getRequestURI());
-        Pattern p = Pattern.compile("/login");
+        //System.out.println(request.getRequestURI());
+        Pattern p = Pattern.compile("/logon");
         Matcher m = p.matcher(request.getRequestURI());
-        Pattern p1 = Pattern.compile("/code/image");
-        Matcher m1 = p1.matcher(request.getRequestURI());
-        Pattern p2 = Pattern.compile("/js/jquery-3.1.1.min.js");
-        Matcher m2 = p2.matcher(request.getRequestURI());
-        Pattern p3 = Pattern.compile("/book");
-        Matcher m3 = p2.matcher(request.getRequestURI());
-        if (m.find() || m1.find() || m2.find()) {
-
-        } else {
+        if (m.find()) {
             try {
                 ServletWebRequest servletWebRequest = new ServletWebRequest(request);
                 String imageCode = (String) sessionStrategy.getAttribute(servletWebRequest, Constant.SESSION_KEY);
@@ -54,6 +48,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
                     throw new ValidateCodeException("验证码不匹配");
                 }
             } catch (ValidateCodeException exception) {
+                logger.error(exception);
                 authenticationFailureHandler.onAuthenticationFailure(request, response, exception);
                 return;
             }
