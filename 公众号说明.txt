@@ -1,2 +1,3 @@
  Java中文社群
    Socket粘包问题终极解决方案—Netty版（2W字）！ https://mp.weixin.qq.com/s/XeMOiUA3gQDnWuxAejwnLg
+   Socket粘包问题的3种解决方案，最后一种最完美！ https://mp.weixin.qq.com/s?__biz=MzU1NTkwODE4Mw==&mid=2247492842&idx=1&sn=fa4f71923302a1e5acc7b7bf0f14b89a&scene=21#wechat_redirect
